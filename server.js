@@ -24,11 +24,11 @@ class Server {
         fs.appendFile("./file.txt", text, function(err) {
             if(err) {
                 response.writeHead(500, {'Content-Type':'text/plain'});
-                response.end("Error saving file.");
+                response.end(userMessages.fileError);
                 return;
             }
             response.writeHead(200, {'Content-Type':'text/plain'});
-            response.end("File saved successfully!");
+            response.end(userMessages.fileSuccess);
         }); 
     }
 
@@ -40,7 +40,7 @@ class Server {
                 response.end(data);
             } else {
                 response.writeHead(404, {'Content-Type':'text/plain'});
-                response.end("404 File not found " + filename);
+                response.end(userMessages.fileNotFound + " " + filename);
             }
           });
     }
@@ -59,7 +59,7 @@ class Server {
                 this.handleReadFile(q, response);
             } else {
                 response.writeHead(404, {'Content-Type':'text/plain'});
-                response.end("404 page not found");
+                response.end(userMessages.pageNotFound);
             }
         }).listen(this.port);
     }
